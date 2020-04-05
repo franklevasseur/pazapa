@@ -3,6 +3,7 @@ package com.example.runfractions;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.SystemClock;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     RunStatus runStatus;
 
     Chronometer chronometer;
+    CountDownTimer timer;
+
     NumberPicker runPicker;
     NumberPicker walkPicker;
     Button startButton;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,12 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
         chronometer = findViewById(R.id.chronometer);
         chronometer.setCountDown(true);
-        chronometer.setOnChronometerTickListener(t -> {
-            if (SystemClock.elapsedRealtime() - t.getBase() > 0) {
-                countdownDone();
-            }
-        });
-
         startButton = findViewById(R.id.start);
         startButton.setOnClickListener(this::start);
     }
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             AssetFileDescriptor afd = getAssets().openFd(fileName);
             player.reset();
-            player.setDataSource(afd.getFileDescriptor(),afd.getStartOffset(),afd.getLength());
+            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
             player.prepare();
             player.start();
         } catch (IOException e) {
@@ -107,7 +105,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setChronometerTime(int minutes, int seconds) {
-        long base = SystemClock.elapsedRealtime() + (minutes * 60000 + seconds * 1000);
+        long ms = minutes * 60000 + seconds * 1000;
+        long base = SystemClock.elapsedRealtime() + ms;
         chronometer.setBase(base);
+
+        if (timer != null) {
+            timer.cancel();
+        }
+        timer = new CountDownTimer(ms, 1000) {
+            public void onTick(long millisUntilFinished) {
+            }
+
+            public void onFinish() {
+                countdownDone();
+            }
+        }.start();
     }
 }
