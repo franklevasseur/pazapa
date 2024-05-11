@@ -1,4 +1,4 @@
-package com.example.runfractions;
+package com.example.pazapa;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;

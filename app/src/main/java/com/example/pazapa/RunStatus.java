@@ -1,4 +1,4 @@
-package com.example.runfractions;
+package com.example.pazapa;
 
 public enum RunStatus {
     WAITING,
