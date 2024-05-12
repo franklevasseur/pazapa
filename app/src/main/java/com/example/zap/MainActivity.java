@@ -1,4 +1,4 @@
-package com.example.pazapa;
+package com.example.zap;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;

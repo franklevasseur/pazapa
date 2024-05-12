@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:exported="true"
-            android:name="com.example.pazapa.MainActivity"
+            android:name="com.example.zap.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

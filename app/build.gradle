@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.example.pazapa"
+        applicationId "com.example.zap"
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
@@ -23,7 +23,7 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    namespace 'com.example.pazapa'
+    namespace 'com.example.zap'
 
 }
 

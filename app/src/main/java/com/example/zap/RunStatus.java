@@ -1,4 +1,4 @@
-package com.example.pazapa;
+package com.example.zap;
 
 public enum RunStatus {
     WAITING,
