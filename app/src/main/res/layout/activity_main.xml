@@ -23,6 +23,7 @@
     <LinearLayout android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:background="@color/colorBase"
         >
 
         <View android:layout_width="match_parent"
@@ -38,6 +39,7 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="25sp"
+            android:textColor="@color/colorAccent"
             />
 
         <LinearLayout
@@ -60,6 +62,7 @@
                     android:layout_gravity="center"
                     android:text="Run minutes"
                     android:textSize="20dp"
+                    android:textColor="@color/colorAccent"
                     />
 
                 <NumberPicker
@@ -67,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
+                    android:textColor="@color/colorAccent"
                     />
 
             </LinearLayout>
@@ -84,6 +88,7 @@
                     android:layout_gravity="center"
                     android:text="Walk minutes"
                     android:textSize="20dp"
+                    android:textColor="@color/colorAccent"
                     />
 
                 <NumberPicker
@@ -97,16 +102,31 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:layout_weight="0.2"
-            android:text="@string/start"
-            />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_weight="0.2"
+                android:text="@string/start" />
+
+            <Button
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_weight="0.2"
+                android:text="@string/stop" />
+        </LinearLayout>
 
         <View android:layout_width="match_parent"
             android:layout_height="0dp"

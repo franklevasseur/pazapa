@@ -1,4 +1,4 @@
-package com.example.runfractions;
+package com.example.zap;
 
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     NumberPicker runPicker;
     NumberPicker walkPicker;
     Button startButton;
+    Button stopButton;
 
     MediaPlayer player = new MediaPlayer();
 
@@ -47,14 +48,24 @@ public class MainActivity extends AppCompatActivity {
 
         chronometer = findViewById(R.id.chronometer);
         chronometer.setCountDown(true);
+
         startButton = findViewById(R.id.start);
         startButton.setOnClickListener(this::start);
+
+        stopButton = findViewById(R.id.stop);
+        stopButton.setOnClickListener(this::stop);
+    }
+
+    private void stop(View v) {
+        this.runStatus = RunStatus.WAITING;
+        this.resetChronometerTime();
+        this.chronometer.stop();
     }
 
     private void start(View v) {
-        runStatus = RunStatus.WAITING;
-        setChronometerTime(0, 5);
-        chronometer.start();
+        this.runStatus = RunStatus.WAITING;
+        this.setChronometerTime(0, 5);
+        this.chronometer.start();
     }
 
     private void countdownDone() {
@@ -69,17 +80,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void run() {
-        runStatus = RunStatus.RUNNING;
-        setChronometerTime(runPicker.getValue(), 0);
-        playAudio("run.mp3");
-        chronometer.start();
+        this.runStatus = RunStatus.RUNNING;
+        this.setChronometerTime(runPicker.getValue(), 0);
+        this.playAudio("run.mp3");
+        this.chronometer.start();
     }
 
     private void walk() {
-        runStatus = RunStatus.WALKING;
-        setChronometerTime(walkPicker.getValue(), 0);
-        playAudio("walk.mp3");
-        chronometer.start();
+        this.runStatus = RunStatus.WALKING;
+        this.setChronometerTime(walkPicker.getValue(), 0);
+        this.playAudio("walk.mp3");
+        this.chronometer.start();
     }
 
     private void playAudio(String fileName) {
@@ -97,15 +108,15 @@ public class MainActivity extends AppCompatActivity {
     private void setupNumPicker(NumberPicker np, int maxValue) {
         np.setMinValue(1);
         np.setMaxValue(maxValue);
-        String[] availables_run_values = new String[maxValue];
+        String[] available_run_values = new String[maxValue];
         for (int i = 0; i < maxValue; i++) {
-            availables_run_values[i] = String.format("%d", i + 1);
+            available_run_values[i] = String.format("%d", i + 1);
         }
-        np.setDisplayedValues(availables_run_values);
+        np.setDisplayedValues(available_run_values);
     }
 
     private void setChronometerTime(int minutes, int seconds) {
-        long ms = minutes * 60000 + seconds * 1000;
+        long ms = minutes * 60000L + seconds * 1000L;
         long base = SystemClock.elapsedRealtime() + ms;
         chronometer.setBase(base);
 
@@ -120,5 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 countdownDone();
             }
         }.start();
+    }
+
+    private void resetChronometerTime() {
+        long base = SystemClock.elapsedRealtime();
+        chronometer.setBase(base);
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }

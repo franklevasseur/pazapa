@@ -1,4 +1,4 @@
-package com.example.runfractions;
+package com.example.zap;
 
 public enum RunStatus {
     WAITING,
